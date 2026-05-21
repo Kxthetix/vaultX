@@ -1,0 +1,37 @@
+{
+  "project": "vaultX",
+  "version": "demo",
+  "target": "example.local",
+  "scan_type": "authorized_demo_scan",
+  "summary": {
+    "total_findings": 3,
+    "critical": 0,
+    "high": 1,
+    "medium": 1,
+    "low": 1
+  },
+  "findings": [
+    {
+      "id": "VX-001",
+      "title": "Open HTTP Service",
+      "severity": "low",
+      "description": "A web service was detected on the target.",
+      "recommendation": "Verify that the service is required and properly configured."
+    },
+    {
+      "id": "VX-002",
+      "title": "Missing Security Headers",
+      "severity": "medium",
+      "description": "Common security headers were not detected in the response.",
+      "recommendation": "Add recommended HTTP security headers such as Content-Security-Policy and X-Frame-Options."
+    },
+    {
+      "id": "VX-003",
+      "title": "Outdated Service Version",
+      "severity": "high",
+      "description": "A service version appears to be outdated based on banner information.",
+      "recommendation": "Verify the version manually and update the service if confirmed vulnerable."
+    }
+  ],
+  "disclaimer": "This is a safe sample report for demo purposes only."
+}

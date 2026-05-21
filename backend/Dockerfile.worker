@@ -1,0 +1,24 @@
+FROM python:3.12-slim-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nmap nikto sqlmap whatweb curl wget unzip build-essential libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+ARG NUCLEI_VERSION=3.2.6
+ARG SUBFINDER_VERSION=v2.6.6
+
+RUN wget -q "https://github.com/projectdiscovery/nuclei/releases/download/v${NUCLEI_VERSION}/nuclei_${NUCLEI_VERSION}_linux_amd64.zip" -O /tmp/nuclei.zip \
+    && unzip /tmp/nuclei.zip -d /usr/local/bin/ && rm /tmp/nuclei.zip \
+    && nuclei -update-templates -silent || true
+
+RUN wget -q "https://github.com/projectdiscovery/subfinder/releases/download/${SUBFINDER_VERSION}/subfinder_${SUBFINDER_VERSION}_linux_amd64.zip" -O /tmp/subfinder.zip \
+    && unzip /tmp/subfinder.zip -d /usr/local/bin/ && rm /tmp/subfinder.zip
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+
+RUN mkdir -p /app/reports /workspace
+
+CMD ["python", "worker.py"]
