@@ -107,6 +107,12 @@ Report Generation
 - Understanding backend structure for cybersecurity tools
 - Building a base for AI-assisted vulnerability analysis
 
+## Demo Status
+
+The current demo backend is working locally with FastAPI and Swagger API documentation.
+
+![vaultX API Docs](docs/screenshots/swagger-demo.png)
+
 ## Roadmap
 
 - Add complete frontend dashboard
